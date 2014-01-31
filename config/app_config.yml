@@ -1,0 +1,56 @@
+DEFAULTS: &DEFAULTS
+  mtgox_username: username 
+  mtgox_password: password
+  site_name:  Bitcoinsms
+  site_url:   bitcoinsms.heroku.com
+  site_email: a@bitcoinsms.heroku.com
+  text_from:  a@bitcoinsms
+ 
+  postmark_api_key: postmarkapikeyhere 
+  
+  providers: [ 
+    # US Providers/Carriers
+    { name: Alltel, value: message.alltel.com }, 
+    { name: Ameritech, value: paging.acswireless.com }, 
+    { name: 'AT&T', value: txt.att.net }, 
+    { name: Bell Atlantic, value: message.bam.com }, 
+    { name: Bellsouth Mobility, value: blsdcs.net }, 
+    { name: BlueSkyFrog, valye: blueskyfrog.com }, 
+    { name: Boost Mobile, value: myboostmobile.com }, 
+    { name: Cellular South, value: csouth1.com }, 
+    { name: Cincinnati Bell, value: gocbw.com },
+    { name: Comcast PCS, value: comcastpcs.textmsg.com }, 
+    { name: Cricket, value: sms.mycricket.com }, 
+    { name: kajeet, value: mobile.kajeet.net }, 
+    { name: Koodo, value: msg.koodomobile.com },
+    { name: Metro PCS, value: mymetropcs.com }, 
+    { name: Powertel, value: ptel.net }, 
+    { name: PSC Wireless, value: sms.pscel.com }, 
+    { name: Qwest, value: qwestmp.com }, 
+    { name: Southern Link, value: page.southernlinc.com }, 
+    { name: Sprint PCS, value: messaging.sprintpcs.com }, 
+    { name: Suncom, value: tms.suncom.com }, 
+    { name: T-Mobile, value: tmomail.net }, 
+    { name: Tracfone, value: mmst5.tracfone.com }, 
+    { name: Telus Mobility, value: msg.telus.com }, 
+    { name: Virgin Mobile, value: vmobl.net }, 
+    { name: Verizon Wireless, value: vtext.com }
+    ]
+    
+development:
+  <<: *DEFAULTS
+  site_name:  Bitcoinsms Dev
+  site_url:   localhost:3000
+  site_email: hi-dev@bitcoinsms.com
+  
+test:
+  <<: *DEFAULTS
+  site_name:  Bitcoinsms Test
+  site_url:   localhost:3000
+  site_email: hi-test@bitcoinsms.com
+ 
+production:
+  <<: *DEFAULTS
+  
+staging:
+  <<: *DEFAULTS

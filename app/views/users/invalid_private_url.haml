@@ -1,0 +1,6 @@
+#invalid-private-url.narrow-column
+  %h2 Invalid secret code
+  %p Have you forgotten your private page? We can send you a new one. Enter your cell below.
+  - form_tag '/users/send_private_url', :method => :post, :class => 'signup_form' do
+    %p= text_field_tag :user_cell, :id => "user_cell"
+    %p.submit= submit_tag "Send it"

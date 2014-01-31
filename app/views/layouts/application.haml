@@ -1,0 +1,23 @@
+!!! Strict
+%html{:lang => "en-us", "xml:lang" => "en-us", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %title= AppConfig[:site_name]
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}
+    / Stylesheets
+    / = stylesheet_link_tag "compiled/application/reset.css"
+    / = stylesheet_link_tag "compiled/application/text.css"
+    / = stylesheet_link_tag "compiled/application/application.css"
+    / Javascripts
+    = javascript_include_tag "plugins/jquery-1.6.1.min.js"
+    = yield_content :head
+  %body
+    #page
+      .message-notice= flash[:notice]
+      .message-error= flash[:error]
+      #header
+        #logo
+          %a{:href => "/"}= AppConfig[:site_name]
+      #content
+        = yield
+    = yield_content :bottom

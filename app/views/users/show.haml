@@ -1,0 +1,43 @@
+- content_for :head do
+  / nada
+  
+- content_for :bottom do
+  = javascript_include_tag "/javascripts/compiled/application/users/show.js"
+  
+#users_show
+  %p
+    %strong>
+      This is
+      %a{:href => "/private/#{@user.private_url}"} 
+        your private page.
+      Bookmark it. It uses a hard to find url to keep your information private.
+  %hr
+  
+  / Settings
+  %h2 Your Settings
+  - form_for @user, "/users/#{@user.private_url}", :class => "signup_form", :method => :put do |f|
+    = error_messages_for @user
+    %p
+      = f.label :cell
+      = f.text_field :cell
+    %p.box
+      = f.label :provider, :caption => "Who's your cell carrier?"
+      = f.select :provider, :options => AppConfig[:providers].collect { |provider| [provider['name'], provider['value']] }, :include_blank => true, :selected => set_selected_provider(@user)
+    %p.submit= f.submit "Save Changes"
+  %hr
+  
+  / rules
+  %h2 Rules
+  - form_for Rule.new, "/users/#{@user.id}/rules", :class => "new_rule", :method => :post do |f|
+    = f.label :latest_price_in_dollars
+    = f.text_field :latest_price_in_dollars, :maxlength => 6
+    = f.submit "Add"
+    
+  %ul
+    - @user.rules.each do |r|
+      %li
+        = r.latest_price_in_dollars
+        %a.delete_rule{:href => "/api_v1/users/#{@user.id}/rules/destroy/#{r.id}"} remove
+
+    
+  

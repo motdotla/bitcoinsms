@@ -1,0 +1,5 @@
+#confirmation.narrow-column
+  %p We are sending you a text message to your phone with a confirmation code. Once you receive the text, enter the code to activate your subscription.
+  - form_tag '/users/activate', :method => :post, :class => 'confirmation_form' do
+    %p= text_field_tag :activation_code, :id => "activation_code"
+    %p.submit= submit_tag "Activate"

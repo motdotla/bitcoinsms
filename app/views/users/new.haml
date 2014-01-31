@@ -1,0 +1,20 @@
+#subscribe.narrow-column
+  %h2.hidden Subscribe
+  - form_for @user, "/users", :id => "signup", :class => "signup_form" do |f|
+    = error_messages_for @user
+    %p
+      = f.label :cell
+      = f.text_field :cell
+    %p.box
+      = f.label :provider, :caption => "Who's your cell carrier?"
+      = f.select :provider, :options => AppConfig[:providers].collect { |provider| [provider['name'], provider['value']] }, :include_blank => true, :selected => set_selected_provider(@user)
+
+    = f.hidden_field :timezone_offset
+    :javascript
+      $(function() {
+      	var visitortime = new Date();
+      	$("#user_timezone_offset").attr("value", visitortime.getTimezoneOffset()/60*-1);
+      });
+      
+    %p.submit
+      = f.submit "Signup"
